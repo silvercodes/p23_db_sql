@@ -1,0 +1,16 @@
+== Модели хранения данных ==
+
+1. Файловая модель (файл, запись, поле)
+
+    101 vasia@mail.com 23 qwerty city1
+    102 petya@mail.com 31 qwerty city1
+
+2. Иерархическая (рекурсивная)
+
+3. Сетевая (графовая)
+
+4. Объектно-ориентированная (no SQL) MongoDB
+
+5. Реляционная: MSSQLServer, MySQL, MariaDB, PostgreSQL, SQLite, ORACLE DB ...
+
+
