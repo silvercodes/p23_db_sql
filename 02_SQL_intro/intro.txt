@@ -1,0 +1,33 @@
+=== Операторы ===
+
++ - * / %
+
+AND OR  NOT
+
+<   >   <=  >=  = (аналог ==) <> (аналог !=)
+
+IN ANY...
+
+DECLARE @a int;
+
+IF ELSE
+
+CASE (аналог switch)
+
+WHILE
+
+COUNT() MAX() MIN() SUM() ABS()...
+
+/*
+    comment
+    comment
+*/
+
+-- comment
+-- comment
+
+
+=== Группы операторов ===
+DML (Data Manipulation Language)    SELECT INSERT UPDATE DELETE MERGE ....
+DDL (Data Definition Language)      CREATE ALTER DROP ...
+DCL (Data Control Language)         GRANT DENY REVOKE ...
