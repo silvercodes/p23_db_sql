@@ -153,16 +153,37 @@ USE p23_company_db;
 --FROM employees
 --ORDER BY full_name
 
-SELECT
-	id,
-	name,
-	bonus_percent
+--SELECT
+--	id,
+--	name,
+--	bonus_percent
+--FROM employees
+--ORDER BY ISNULL(bonus_percent, 100);
+
+
+-------------- TOP -----------------
+--SELECT TOP 3 *
+--FROM employees;
+
+--SELECT TOP 50 PERCENT *
+--FROM employees;
+
+--SELECT TOP 2 WITH TIES
+--	id, first_name, last_name, salary
+--FROM employees
+--ORDER BY salary;
+
+-- Выбрать пользователей с максимальной ЗП
+--SELECT TOP 1 WITH TIES
+--	id, first_name, last_name, salary
+--FROM employees
+--ORDER BY salary DESC
+
+-- Выбрать 2 самые большие ЗП
+SELECT DISTINCT TOP 2
+	salary
 FROM employees
-ORDER BY bonus_percent
-
-
-
-
+ORDER BY salary DESC;
 
 
 
