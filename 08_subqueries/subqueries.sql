@@ -94,6 +94,62 @@
 -- TASK
 -- Вывести пользователей, у которых есть альбомы с рейтингом 5
 
+--SELECT id, email
+--FROM users
+--WHERE id = ANY 
+--	(
+--		SELECT user_id
+--		FROM albums
+--		WHERE rate = 5
+--	);
+
+--SELECT id, email
+--FROM users
+--WHERE id IN
+--	(
+--		SELECT user_id
+--		FROM albums
+--		WHERE rate = 5
+--	);
+
+--SELECT id, email
+--FROM users u
+--WHERE EXISTS 
+--	(
+--		SELECT a.id
+--		FROM albums a
+--		WHERE a.user_id = u.id AND a.rate = 5
+--	);
+
+
+-- TASK
+-- Выбрать пользователей, у которых альбомы имеют максимальный рейтинг
+
+--SELECT u.email
+--FROM albums a LEFT JOIN users u ON a.user_id = u.id
+--WHERE ISNULL(a.rate, 0) = (
+--	SELECT MAX(rate)
+--	FROM albums
+--);
+
+
+SELECT email
+FROM users
+WHERE id IN (
+	SELECT user_id
+	FROM albums
+	WHERE rate = (
+		SELECT MAX(rate)
+		FROM albums
+	)
+);
+
+
+
+
+
+
+
 
 
 
