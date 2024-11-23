@@ -211,4 +211,21 @@
 
 
 
+-- ===== HW ====== --
+SELECT 
+	u.id,
+	u.email,
+	u.nickname,
+	COUNT(i.id) [img_count]
+FROM users u LEFT JOIN images i ON i.user_id = u.id
+WHERE YEAR(i.publish_date) = 2022
+GROUP BY u.id, u.email, nickname
+ORDER BY img_count DESC;
+
+
+
+
+
+
+
 
