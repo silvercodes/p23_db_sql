@@ -109,38 +109,80 @@
 
 
 
-CREATE TABLE teachers (
-	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	full_name nvarchar(50) NOT NULL
-);
+-- CREATE TABLE teachers (
+-- 	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+-- 	full_name nvarchar(50) NOT NULL
+-- );
 
-CREATE TABLE groups (
-	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	title nvarchar(50) NOT NULL
-);
+-- CREATE TABLE groups (
+-- 	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+-- 	title nvarchar(50) NOT NULL
+-- );
 
-CREATE TABLE groups_teachers (
-	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	teacher_id int NOT NULL,
-	group_id int NOT NULL,
-	start_date DATE NOT NULL,
-	end_date DATE NULL,
-	status tinyint NOT NULL DEFAULT(0),
+-- CREATE TABLE groups_teachers (
+-- 	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+-- 	teacher_id int NOT NULL,
+-- 	group_id int NOT NULL,
+-- 	start_date DATE NOT NULL,
+-- 	end_date DATE NULL,
+-- 	status tinyint NOT NULL DEFAULT(0),
 
-	CONSTRAINT UQ_teacher_id_group_id UNIQUE(teacher_id, group_id),
-	CONSTRAINT FK_groups_teachers_teachers FOREIGN KEY (teacher_id) REFERENCES teachers(id),
-	CONSTRAINT FK_groups_teachers_groups FOREIGN KEY (group_id) REFERENCES groups(id)
-);
+-- 	CONSTRAINT UQ_teacher_id_group_id UNIQUE(teacher_id, group_id),
+-- 	CONSTRAINT FK_groups_teachers_teachers FOREIGN KEY (teacher_id) REFERENCES teachers(id),
+-- 	CONSTRAINT FK_groups_teachers_groups FOREIGN KEY (group_id) REFERENCES groups(id)
+-- );
 
-INSERT INTO teachers (full_name)
-VALUES ('vasia'), ('petya'), ('dima');
+-- INSERT INTO teachers (full_name)
+-- VALUES ('vasia'), ('petya'), ('dima');
 
-INSERT INTO groups (title)
-VALUES ('gr_101'), ('gr_102'), ('gr_103')
+-- INSERT INTO groups (title)
+-- VALUES ('gr_101'), ('gr_102'), ('gr_103')
 
-drop table groups_teachers;
-drop table teachers;
-drop table groups;
+-- drop table groups_teachers;
+-- drop table teachers;
+-- drop table groups;
 
 
+
+
+
+-- "Сложные" (необычные) случаи --
+
+-- 1. Вложенные категории
+
+-- class Category
+-- {
+-- 	public int id;
+-- 	public string ttile;
+-- 	// public List<Category> children;
+-- 	public Category? parent;
+-- }
+
+--CREATE TABLE categories (
+--	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+--	title varchar(50) NOT NULL,
+--	parent_id int NULL,
+
+--	CONSTRAINT FK_categories_parent FOREIGN KEY (parent_id) REFERENCES categories(id)
+--);
+
+
+-- 2. Система подписок между пользователями
+
+-- CREATE TABLE users (
+-- 	id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+-- 	email varchar(50) UNIQUE NOT NULL
+-- );
+
+-- CREATE TABLE subscribes (
+-- 	user_id int NOT NULL,
+-- 	subscriber_id int NOT NULL,
+
+-- 	CONSTRAINT PK_subscribes PRIMARY KEY (user_id, subscriber_id),
+
+-- 	CONSTRAINT FK_subscribes_users FOREIGN KEY (user_id) REFERENCES users(id),
+-- 	CONSTRAINT FK_subscribes_users_subscribers FOREIGN KEY (subscriber_id) REFERENCES users(id),
+
+-- 	CHECK(user_id <> subscriber_id)
+-- );
 
