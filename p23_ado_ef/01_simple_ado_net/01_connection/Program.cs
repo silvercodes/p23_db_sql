@@ -131,6 +131,60 @@ const string connStringLocalDB = @"Server=(localdb)\MSSQLLocalDB;Database=p23_ad
 
 // === ExecuteReader
 
+//using SqlConnection conn = new SqlConnection(connString);
+
+//try
+//{
+//    conn.Open();
+//    Console.WriteLine("Connection OK");
+
+//    string query = @"SELECT id, email, password FROM users;";
+
+//    SqlCommand cmd =  new SqlCommand(query, conn);
+
+//    using (SqlDataReader reader = cmd.ExecuteReader())
+//    {
+//        Console.WriteLine($"{reader.GetName(0)}\t\t{reader.GetName(1)}\t\t{reader.GetName(2)}");
+
+//        //while(reader.Read())
+//        //{
+//        //    // итерация для отдельной строки (записи)!
+//        //    // int id = (int)reader[0];
+//        //    // int id = (int)reader["id"];
+//        //    // int id = reader.GetInt32("id");
+//        //    // int id = (int)reader.GetValue(0);
+//        //    int id = reader.GetFieldValue<int>("id");
+
+//        //    string email = reader.GetFieldValue<string>("email");
+
+//        //    string password = reader.GetFieldValue<string>("password");
+
+//        //    Console.WriteLine($"{id}\t\t{email}\t\t{password}");
+//        //}
+
+//        DataTable dt = new DataTable();
+//        dt.Load(reader);
+
+//        foreach(DataRow row in dt.Rows)
+//            Console.WriteLine($"{row["id"]}\t\t{row["email"]}\t\t{row["password"]}");
+//    }
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine($"ERROR: {ex.Message}");
+//}
+//finally
+//{
+//    if (conn.State == System.Data.ConnectionState.Open)
+//    {
+//        conn.Close();
+//        Console.WriteLine("Connection closed");
+//    }
+//}
+
+
+// === ExecuteScalar
+
 using SqlConnection conn = new SqlConnection(connString);
 
 try
@@ -138,32 +192,14 @@ try
     conn.Open();
     Console.WriteLine("Connection OK");
 
-    string query = @"SELECT id, email, password FROM users;";
+    string query = @"SELECT MAX(id) FROM users;";
 
-    SqlCommand cmd =  new SqlCommand(query, conn);
+    SqlCommand cmd = new SqlCommand(query, conn);
 
-    using (SqlDataReader reader = cmd.ExecuteReader())
-    {
-        Console.WriteLine($"{reader.GetName(0)}\t\t{reader.GetName(1)}\t\t{reader.GetName(2)}");
+    int maxId = (int)cmd.ExecuteScalar();
 
-        while(reader.Read())
-        {
-            // итерация для отдельной строки (записи)!
-            // int id = (int)reader[0];
-            // int id = (int)reader["id"];
-            // int id = reader.GetInt32("id");
-            // int id = (int)reader.GetValue(0);
-            int id = reader.GetFieldValue<int>("id");
+    Console.WriteLine($"maId: {maxId}");
 
-            string email = reader.GetFieldValue<string>("email");
-
-            string password = reader.GetFieldValue<string>("password");
-
-            Console.WriteLine($"{id}\t\t{email}\t\t{password}");
-        }
-
-
-    }
 }
 catch (Exception ex)
 {
@@ -177,8 +213,6 @@ finally
         Console.WriteLine("Connection closed");
     }
 }
-
-// === ExecuteScalar
 
 #endregion
 
