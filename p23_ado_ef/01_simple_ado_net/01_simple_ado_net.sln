@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_connection", "01_connection\01_connection.csproj", "{615F46A9-9845-400C-B5B9-8BD1078BA6D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_stored_procedures", "02_stored_procedures\02_stored_procedures.csproj", "{BF5D3309-C744-49BF-B276-72B9FFDB89E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02_stored_procedures", "02_stored_procedures\02_stored_procedures.csproj", "{BF5D3309-C744-49BF-B276-72B9FFDB89E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_prepared_queries", "03_prepared_queries\03_prepared_queries.csproj", "{27D26C30-5E99-4595-A760-A26FEA434E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BF5D3309-C744-49BF-B276-72B9FFDB89E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF5D3309-C744-49BF-B276-72B9FFDB89E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF5D3309-C744-49BF-B276-72B9FFDB89E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D26C30-5E99-4595-A760-A26FEA434E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D26C30-5E99-4595-A760-A26FEA434E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D26C30-5E99-4595-A760-A26FEA434E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D26C30-5E99-4595-A760-A26FEA434E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
