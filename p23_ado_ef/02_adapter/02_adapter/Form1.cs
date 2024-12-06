@@ -43,6 +43,8 @@ namespace _02_adapter
             */
 
             ModifyUpdateCommand();
+            ModifyDeleteCommand();
+            ModifyInsertCommand();
 
             adapter.Fill(ds);
             dgvMain.DataSource = ds.Tables[0];
@@ -50,7 +52,11 @@ namespace _02_adapter
 
         private void btnSync_Click(object sender, EventArgs e)
         {
-            adapter.Update(ds.Tables[0]);
+            // adapter.Update(ds.Tables[0]);
+
+            DataTable t = ds.Tables[0];
+            DataRow[] rows = t.Select(null, null, DataViewRowState.ModifiedCurrent | DataViewRowState.Added);
+            adapter.Update(rows);
         }
 
         private void ModifyUpdateCommand()
@@ -61,10 +67,77 @@ namespace _02_adapter
                 WHERE id = @p_id;
             ";
             SqlCommand cmd = new SqlCommand(query, conn);
-            //
-            //
+
+            cmd.Parameters.Add(new SqlParameter("@p_nickname", SqlDbType.NVarChar, 50)
+            { 
+                SourceColumn = "nickname",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            cmd.Parameters.Add(new SqlParameter("@p_birthday", SqlDbType.Date)
+            {
+                SourceColumn = "birthday",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            cmd.Parameters.Add(new SqlParameter("@p_id", SqlDbType.Int)
+            {
+                SourceColumn = "id",
+                SourceVersion = DataRowVersion.Original,
+            });
 
             adapter.UpdateCommand = cmd;
+        }
+
+        private void ModifyDeleteCommand()
+        {
+            // string query = @"DELETE FROM users WHERE id = @p_id;";
+
+            string query = @"UPDATE users SET deleted_at=GETDATE() WHERE id = @p_id;";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.Add(new SqlParameter("@p_id", SqlDbType.Int)
+            {
+                SourceColumn = "id",
+                SourceVersion = DataRowVersion.Original,
+            });
+
+            adapter.DeleteCommand = cmd;
+        }
+
+        private void ModifyInsertCommand()
+        {
+            SqlCommand cmd = new SqlCommand("uspInsertUser", conn)
+            {
+                CommandType = CommandType.StoredProcedure,
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar, 50)
+            { 
+                SourceColumn = "email",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            cmd.Parameters.Add(new SqlParameter("@nickname", SqlDbType.NVarChar, 50)
+            {
+                SourceColumn = "nickname",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            cmd.Parameters.Add(new SqlParameter("@password", SqlDbType.NVarChar, 50)
+            {
+                SourceColumn = "password",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            cmd.Parameters.Add(new SqlParameter("@birthday", SqlDbType.Date)
+            {
+                SourceColumn = "birthday",
+                SourceVersion = DataRowVersion.Current,
+            });
+
+            adapter.InsertCommand = cmd;
         }
     }
 }
